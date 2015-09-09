@@ -73,11 +73,19 @@ console.assert(squares[3] === 16)
 function filter(array, callback){
     // YOUR CODE HERE
     newArray = [];
-    for (i = 0; i < array.length; i++) {
-        if (callback(array[i])) {
-            newArray.push(array[i]);
+    total = [0];
+    // for (i = 0; i < array.length; i++) {
+    //     if (callback(array[i])) {
+    //         newArray.push(array[i]);
+    //     }
+    // }
+    // return newArray;
+    reduce(array, function(element) {
+        total = callback(element, total);
+        if (total) {
+            newArray.push(element);
         }
-    }
+    })
     return newArray;
 }
 
@@ -86,9 +94,3 @@ function filter(array, callback){
 var evens = filter([1, 2, 3, 4], function(v){ return v%2 === 0 })
 console.assert(evens[0] === 2)
 console.assert(evens[1] === 4)
-
-
-// ----------------------------
-// using reduce() from above, write your own sum()
-// that adds up all arguments to sum (note: variadic behavior)
-// ----------------------------
